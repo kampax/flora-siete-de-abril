@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Tarjeta from '../components/Tarjeta.astro';
+import { MESES } from '../lib';
+
+const especies = (await getCollection('especies')).sort((a, b) =>
+  a.data.nombres_comunes[0].localeCompare(b.data.nombres_comunes[0], 'es'),
+);
+const uniq = (xs: string[]) => [...new Set(xs)].sort((a, b) => a.localeCompare(b, 'es'));
+const habitos = uniq(especies.map((e) => e.data.habito));
+const origenes = uniq(especies.map((e) => e.data.origen));
+const familias = uniq(especies.map((e) => e.data.familia));
+const colores = uniq(especies.map((e) => e.data.color_flor).filter(Boolean) as string[]);
+---
+<Base titulo="Catálogo">
+  <h1>Catálogo de especies</h1>
+  <input class="buscador" id="q" type="search" placeholder="Buscar por nombre popular, científico o familia" aria-label="Buscar" />
+
+  <div class="filtros">
+    <label>Hábito
+      <select id="f-habito"><option value="">Todos</option>{habitos.map((x) => <option value={x}>{x}</option>)}</select></label>
+    <label>Origen
+      <select id="f-origen"><option value="">Todos</option>{origenes.map((x) => <option value={x}>{x}</option>)}</select></label>
+    <label>Familia
+      <select id="f-familia"><option value="">Todas</option>{familias.map((x) => <option value={x}>{x}</option>)}</select></label>
+    <label>Color de flor
+      <select id="f-color"><option value="">Todos</option>{colores.map((x) => <option value={x}>{x}</option>)}</select></label>
+    <label>Florece en
+      <select id="f-mes"><option value="">Cualquier mes</option>{MESES.map((m, i) => <option value={i + 1}>{m}</option>)}</select></label>
+    <button class="btn" id="limpiar" type="button">Limpiar</button>
+  </div>
+
+  <p class="contador" id="contador" aria-live="polite"></p>
+  <ul class="grilla" id="lista">
+    {especies.map((e) => <Tarjeta slug={e.id} datos={e.data} />)}
+  </ul>
+  <p id="vacio" hidden>No hay especies con esos criterios.</p>
+</Base>
+
+<script>
+  const norm = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+  const items = [...document.querySelectorAll<HTMLElement>('#lista .tarjeta')];
+  const campos = { habito: 'f-habito', origen: 'f-origen', familia: 'f-familia', color: 'f-color', mes: 'f-mes' } as const;
+
+  // Estado inicial desde la dirección (?q=...&habito=...)
+  const params = new URLSearchParams(location.search);
+  $('q').value = params.get('q') ?? '';
+  for (const [k, id] of Object.entries(campos)) $(id).value = params.get(k) ?? '';
+
+  function aplicar() {
+    const q = norm($('q').value.trim());
+    const f = Object.fromEntries(Object.entries(campos).map(([k, id]) => [k, $(id).value]));
+    let n = 0;
+    for (const el of items) {
+      const ok =
+        (!q || el.dataset.busqueda!.includes(q)) &&
+        (!f.habito || el.dataset.habito === f.habito) &&
+        (!f.origen || el.dataset.origen === f.origen) &&
+        (!f.familia || el.dataset.familia === f.familia) &&
+        (!f.color || el.dataset.color === f.color) &&
+        (!f.mes || el.dataset.meses!.split(',').includes(f.mes));
+      el.hidden = !ok;
+      if (ok) n++;
+    }
+    $('contador').textContent = `${n} de ${items.length} especies`;
+    $('vacio').hidden = n > 0;
+    const p = new URLSearchParams();
+    if ($('q').value.trim()) p.set('q', $('q').value.trim());
+    for (const [k, v] of Object.entries(f)) if (v) p.set(k, v as string);
+    history.replaceState(null, '', p.size ? `?${p}` : location.pathname);
+  }
+  ['q', ...Object.values(campos)].forEach((id) => $(id).addEventListener('input', aplicar));
+  $('limpiar').addEventListener('click', () => {
+    $('q').value = '';
+    Object.values(campos).forEach((id) => ($(id).value = ''));
+    aplicar();
+  });
+  aplicar();
+</script>

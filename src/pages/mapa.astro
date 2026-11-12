@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Mapa from '../components/Mapa.astro';
+import { url, fotoMini, todasLasFotos, puntoPublico } from '../lib';
+
+const especies = new Map((await getCollection('especies')).map((e) => [e.id, e.data]));
+const puntos: any[] = [];
+const vistos = new Set<number>();
+
+for (const f of todasLasFotos) {
+  const p = puntoPublico(f);
+  if (!p) continue;
+  const [lat, lon] = p;
+  const sp = f.especie ? especies.get(f.especie) : null;
+  if (sp) {
+    puntos.push({ lat, lon, titulo: sp.nombres_comunes[0], sub: sp.nombre_cientifico, href: url(`especies/${f.especie}/`), img: fotoMini(f.id), tipo: 'especie', habito: sp.habito, origen: sp.origen });
+  } else if (!vistos.has(f.grupo)) {
+    vistos.add(f.grupo); // un punto por planta sin identificar
+    puntos.push({ lat, lon, titulo: `Planta por identificar #${f.grupo}`, sub: f.fecha.slice(0, 10), href: url(`por-identificar/#g${f.grupo}`), img: fotoMini(f.id), tipo: 'pendiente' });
+  }
+}
+const habitos = [...new Set(puntos.map((p) => p.habito).filter(Boolean))];
+const origenes = [...new Set(puntos.map((p) => p.origen).filter(Boolean))];
+---
+<Base titulo="Mapa">
+  <h1>Mapa de plantas</h1>
+  <p class="texto">Cada punto es una planta fotografiada. <span style="color:#3f6b3a">●</span> identificada · <span style="color:#b9772c">●</span> por identificar. Las posiciones se muestran de forma aproximada (unos 100 m).</p>
+  <div class="filtros">
+    <label>Mostrar
+      <select id="m-tipo">
+        <option value="">Todo</option><option value="especie">Identificadas</option><option value="pendiente">Por identificar</option>
+      </select></label>
+    {habitos.length > 0 && <label>Hábito
+      <select id="m-habito"><option value="">Todos</option>{habitos.map((x) => <option>{x}</option>)}</select></label>}
+    {origenes.length > 0 && <label>Origen
+      <select id="m-origen"><option value="">Todos</option>{origenes.map((x) => <option>{x}</option>)}</select></label>}
+  </div>
+  <Mapa puntos={puntos} />
+  <p class="pie">{puntos.length} puntos. Las fotos sin ubicación (cámara con GPS apagado) todavía no aparecen.</p>
+</Base>
+
+<script>
+  const mapa = document.getElementById('mapa') as any;
+  const v = (id: string) => (document.getElementById(id) as HTMLSelectElement | null)?.value ?? '';
+  function filtrar() {
+    const t = v('m-tipo'), h = v('m-habito'), o = v('m-origen');
+    mapa._pintar((p: any) =>
+      (!t || p.tipo === t) && (!h || p.habito === h) && (!o || p.origen === o));
+  }
+  ['m-tipo', 'm-habito', 'm-origen'].forEach((id) => document.getElementById(id)?.addEventListener('change', filtrar));
+</script>

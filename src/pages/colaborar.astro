@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib';
+---
+<Base titulo="Colaborar">
+  <h1>Colaborar</h1>
+  <div class="texto">
+    <p>Podés ayudar de tres maneras:</p>
+    <ul>
+      <li><b>Proponer un nombre</b> para una de las <a href={url('por-identificar/')}>plantas por identificar</a>.</li>
+      <li><b>Corregir</b> una identificación o un dato de una ficha.</li>
+      <li><b>Enviar fotos</b> de plantas del pueblo: planta entera, flor, fruto y hoja, con la fecha y el lugar.</li>
+    </ul>
+    <p class="aviso">Falta definir el medio de contacto (correo o formulario). Ver pregunta 5 del plan de acción.</p>
+  </div>
+</Base>

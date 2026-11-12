@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib';
+---
+<Base titulo="Créditos y licencia">
+  <h1>Créditos y licencia</h1>
+  <div class="texto">
+    <ul>
+      <li><b>Fotografías y edición:</b> Natalia Paz.</li>
+      <li><b>Identificación botánica:</b> Carlos Navarro.</li>
+      <li><b>Referencias:</b> <a href="https://floraargentina.edu.ar" rel="noopener">Flora Argentina</a>, <a href="https://powo.science.kew.org" rel="noopener">Plants of the World Online</a>, PlanEAr.</li>
+      <li><b>Mapa:</b> © colaboradores de <a href="https://www.openstreetmap.org/copyright" rel="noopener">OpenStreetMap</a>.</li>
+    </ul>
+    <h2>Licencia</h2>
+    <p>Las fotos se proponen bajo <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.es" rel="noopener">CC BY-NC 4.0</a> (se pueden reutilizar citando al autor, sin uso comercial). <span class="aviso" style="padding:.1rem .5rem">Pendiente de acuerdo con Natalia Paz.</span> El código del sitio es MIT.</p>
+    <h2>Cómo citar</h2>
+    <p>Paz, N. y Navarro, C. (2026). <i>Flora de Siete de Abril</i>. Relevamiento fotográfico.</p>
+    <h2>Descargas</h2>
+    <p><a href={url('especies.csv')} download>Lista de especies (CSV)</a></p>
+  </div>
+</Base>

@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Tarjeta from '../components/Tarjeta.astro';
+import { url, todasLasFotos, normalizar } from '../lib';
+
+const especies = await getCollection('especies');
+const grupos = new Set(todasLasFotos.map((f) => f.grupo)).size;
+const destacadas = especies.slice(0, 4);
+const habitos = ['árbol', 'arbusto', 'hierba', 'cactus', 'enredadera'].filter((h) => especies.some((e) => e.data.habito === h));
+---
+<Base titulo="Flora de Siete de Abril">
+  <section class="hero">
+    <h1>Flora de Siete de Abril</h1>
+    <p>Un relevamiento fotográfico de las plantas del pueblo y su monte: árboles nativos y exóticos, cactáceas y hierbas. Buscá una planta por su nombre popular, su nombre científico o su familia.</p>
+    <form action={url('catalogo/')} role="search">
+      <input class="buscador" type="search" name="q" placeholder="Buscar: algarrobo, Fabaceae, cardón…" aria-label="Buscar una planta" />
+    </form>
+    <div class="cifras">
+      <div class="cifra"><b>{especies.length}</b>especies con ficha</div>
+      <div class="cifra"><b>{todasLasFotos.length}</b>fotos</div>
+      <div class="cifra"><b>{grupos}</b>plantas por identificar</div>
+    </div>
+  </section>
+
+  <h2>Explorar por grupo</h2>
+  <div class="grupos">
+    {habitos.map((h) => <a href={url(`catalogo/?habito=${encodeURIComponent(h)}`)}>{h[0].toUpperCase() + h.slice(1)}s</a>)}
+    <a href={url('mapa/')}>Mapa</a>
+    <a href={url('por-identificar/')}>Por identificar</a>
+  </div>
+
+  <h2>Algunas especies</h2>
+  <ul class="grilla">
+    {destacadas.map((e) => <Tarjeta slug={e.id} datos={e.data} />)}
+  </ul>
+  <p><a href={url('catalogo/')}>Ver todo el catálogo →</a></p>
+</Base>

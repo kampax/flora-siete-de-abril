@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { url } from '../lib';
+
+const especies = await getCollection('especies');
+const porFamilia = new Map<string, typeof especies>();
+for (const e of especies) porFamilia.set(e.data.familia, [...(porFamilia.get(e.data.familia) ?? []), e]);
+const familias = [...porFamilia.entries()].sort(([a], [b]) => a.localeCompare(b));
+---
+<Base titulo="Índice por familia">
+  <h1>Índice por familia</h1>
+  <p class="texto">Lista taxonómica de las especies con ficha, ordenada por familia y nombre científico.</p>
+  {familias.map(([fam, lista]) => (
+    <section>
+      <h2 id={fam.toLowerCase()}>{fam} <small style="color:var(--suave);font-weight:400">({lista.length})</small></h2>
+      <ul class="fam">
+        {lista.sort((a, b) => a.data.nombre_cientifico.localeCompare(b.data.nombre_cientifico)).map((e) => (
+          <li><a href={url(`especies/${e.id}/`)}><em>{e.data.nombre_cientifico}</em></a> — {e.data.nombres_comunes[0]}</li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Base>

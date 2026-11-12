@@ -1,0 +1,28 @@
+---
+import { url, fotoMini, normalizar } from '../lib';
+interface Props { slug: string; datos: any }
+const { slug, datos: d } = Astro.props;
+const principal = d.fotos.find((f: any) => f.principal) ?? d.fotos[0];
+const busqueda = normalizar([d.nombre_cientifico, d.familia, ...d.nombres_comunes].join(' '));
+---
+<li class="tarjeta"
+    data-busqueda={busqueda}
+    data-habito={d.habito}
+    data-origen={d.origen}
+    data-familia={d.familia}
+    data-color={d.color_flor ?? ''}
+    data-meses={d.floracion.join(',')}>
+  <a href={url(`especies/${slug}/`)}>
+    {principal
+      ? <img class="img" src={fotoMini(principal.archivo)} alt={`${d.nombres_comunes[0]} (${d.nombre_cientifico}): ${principal.parte}`} loading="lazy" width="480" height="360" />
+      : <div class="sinfoto" aria-hidden="true">Sin foto todavía</div>}
+    <div class="cuerpo">
+      <h3>{d.nombres_comunes[0]}</h3>
+      <div class="sci"><em>{d.nombre_cientifico}</em></div>
+      <div class="etiquetas">
+        <span class={`etiqueta ${d.origen}`}>{d.origen}</span>
+        <span class="etiqueta">{d.habito}</span>
+      </div>
+    </div>
+  </a>
+</li>

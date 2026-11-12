@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+# Originales y comprimidos: nunca al repositorio
+originales/
+*.zip
+Plantas por identificar*/

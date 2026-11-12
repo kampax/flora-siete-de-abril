@@ -1,0 +1,110 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Tarjeta from '../../components/Tarjeta.astro';
+import Mapa from '../../components/Mapa.astro';
+import { url, MESES, fotoGrande, fotoMini, todasLasFotos, puntoPublico } from '../../lib';
+
+export async function getStaticPaths() {
+  const todas = await getCollection('especies');
+  return todas.map((e) => ({ params: { slug: e.id }, props: { e, todas } }));
+}
+const { e, todas } = Astro.props;
+const d = e.data;
+const { Content } = await render(e);
+
+const fotos = [...d.fotos].sort((a, b) => Number(b.principal) - Number(a.principal));
+const mismaFamilia = todas.filter((x) => x.id !== e.id && x.data.familia === d.familia);
+
+const puntos = todasLasFotos
+  .filter((f) => f.especie === e.id && puntoPublico(f))
+  .map((f) => {
+    const [lat, lon] = puntoPublico(f)!;
+    return { lat, lon, titulo: d.nombres_comunes[0], sub: f.fecha.slice(0, 10), href: url(`especies/${e.id}/`), img: fotoMini(f.id), tipo: 'especie' };
+  });
+
+const confianza = { confirmada: 'Identificación confirmada', probable: 'Identificación probable', 'a revisar': 'Identificación a revisar' }[d.confianza_id];
+---
+<Base titulo={d.nombres_comunes[0]} descripcion={`${d.nombres_comunes.join(', ')} (${d.nombre_cientifico}), ${d.familia}. ${d.origen}.`}>
+  <p><a href={url('catalogo/')}>← Catálogo</a></p>
+  <h1>{d.nombres_comunes[0]}</h1>
+  <p class="sci" style="font-size:1.2rem;margin-top:0"><em>{d.nombre_cientifico}</em> {d.autor_taxon}</p>
+
+  <div class="ficha">
+    <div>
+      {fotos.length
+        ? (
+          <figure class="galeria" style="margin:0" id="galeria">
+            <div class="principal">
+              <img id="gal-img" src={fotoGrande(fotos[0].archivo)} alt={`${d.nombres_comunes[0]}: ${fotos[0].parte}`} />
+            </div>
+            <figcaption id="gal-cap">{fotos[0].parte} · Foto: {fotos[0].autor} · {fotos[0].fecha.toISOString().slice(0, 10)} · CC BY-NC 4.0</figcaption>
+            {fotos.length > 1 && (
+              <div class="tiras">
+                {fotos.map((f, i) => (
+                  <button type="button" aria-current={i === 0 ? 'true' : 'false'}
+                    data-src={fotoGrande(f.archivo)}
+                    data-cap={`${f.parte} · Foto: ${f.autor} · ${f.fecha.toISOString().slice(0, 10)} · CC BY-NC 4.0`}
+                    data-alt={`${d.nombres_comunes[0]}: ${f.parte}`}>
+                    <img src={fotoMini(f.archivo)} alt={`Ver ${f.parte}`} loading="lazy" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </figure>
+        )
+        : <div class="sinfoto" style="border-radius:12px;aspect-ratio:4/3">Sin foto todavía</div>}
+      {puntos.length > 0 && <Mapa id="minimapa" puntos={puntos} />}
+    </div>
+
+    <div>
+      <dl class="datos">
+        <dt>Familia</dt><dd>{d.familia}</dd>
+        <dt>Hábito</dt><dd>{d.habito}</dd>
+        <dt>Origen</dt><dd>{d.origen}{d.region_origen ? ` (${d.region_origen})` : ''}</dd>
+        {d.ambiente.length > 0 && <><dt>Dónde se ve</dt><dd>{d.ambiente.join(', ')}</dd></>}
+        {d.color_flor && <><dt>Color de flor</dt><dd>{d.color_flor}</dd></>}
+        {d.conservacion && <><dt>Conservación</dt><dd>{d.conservacion}</dd></>}
+        <dt>Identificación</dt><dd>{confianza}, por {d.identificado_por}</dd>
+        {d.nombres_comunes.length > 1 && <><dt>Otros nombres</dt><dd>{d.nombres_comunes.slice(1).join(', ')}</dd></>}
+      </dl>
+
+      {d.floracion.length > 0 && (
+        <>
+          <h2>Floración</h2>
+          <div class="calendario" role="img" aria-label={`Florece en: ${d.floracion.map((m) => MESES[m - 1]).join(', ')}`}>
+            {MESES.map((m, i) => <span class={d.floracion.includes(i + 1) ? 'on' : ''}>{m}</span>)}
+          </div>
+        </>
+      )}
+
+      <h2>Cómo reconocerla</h2>
+      <div class="texto"><Content /></div>
+
+      <p>
+        {d.flora_argentina && <a href={d.flora_argentina} rel="noopener">Flora Argentina ↗</a>}
+        {d.flora_argentina && d.inaturalist && ' · '}
+        {d.inaturalist && <a href={d.inaturalist} rel="noopener">iNaturalist ↗</a>}
+      </p>
+    </div>
+  </div>
+
+  {mismaFamilia.length > 0 && (
+    <>
+      <h2>Otras especies de {d.familia}</h2>
+      <ul class="grilla">{mismaFamilia.map((x) => <Tarjeta slug={x.id} datos={x.data} />)}</ul>
+    </>
+  )}
+</Base>
+
+<script>
+  const img = document.getElementById('gal-img') as HTMLImageElement | null;
+  const cap = document.getElementById('gal-cap');
+  const botones = document.querySelectorAll<HTMLButtonElement>('.tiras button');
+  botones.forEach((b) =>
+    b.addEventListener('click', () => {
+      img!.src = b.dataset.src!; img!.alt = b.dataset.alt!; cap!.textContent = b.dataset.cap!;
+      botones.forEach((x) => x.setAttribute('aria-current', String(x === b)));
+    }),
+  );
+</script>

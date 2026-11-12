@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import { url, fotoMini, fotoGrande, todasLasFotos } from '../lib';
+
+// Solo las fotos que aún no tienen especie asignada. Los grupos son preliminares (tomas seguidas).
+const pendientes = todasLasFotos.filter((f) => !f.especie);
+const grupos = new Map<number, typeof pendientes>();
+for (const f of pendientes) grupos.set(f.grupo, [...(grupos.get(f.grupo) ?? []), f]);
+const lista = [...grupos.entries()].sort(([a], [b]) => a - b);
+// Sugerencia tomada de los comentarios del álbum (género o familia, sin llegar a especie)
+const sug = (fs: typeof pendientes) => {
+  const x = fs.find((f) => f.taxon);
+  return x ? `${x.rango === 'familia' ? 'familia ' : ''}${x.taxon}${x.rango === 'genero' ? ' sp.' : ''}${x.confianza === 'probable' ? ' (probable)' : ''}` : '';
+};
+const fmt = (s: string) => new Date(s).toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base titulo="Por identificar">
+  <h1>Plantas por identificar</h1>
+  <p class="texto">Estas fotos de septiembre de 2020 todavía no tienen nombre. Las tomas sacadas una tras otra se agrupan como una misma planta (agrupación automática, puede haber errores). ¿Sabés cuál es? <a href={url('colaborar/')}>Proponé una identificación</a>.</p>
+  <p class="aviso">{lista.length} grupos · {pendientes.length} fotos</p>
+
+  {lista.map(([n, fotos]) => (
+    <section id={`g${n}`}>
+      <h2>Planta #{n}{sug(fotos) && <span> — {sug(fotos)}</span>} <small style="color:var(--suave);font-weight:400">· {fmt(fotos[0].fecha)} · {fotos.length} {fotos.length === 1 ? 'foto' : 'fotos'}</small></h2>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        {fotos.map((f) => (
+          <a href={fotoGrande(f.id)}>
+            <img src={fotoMini(f.id)} alt={`Planta por identificar #${n}, foto ${f.id}`} loading="lazy" width="200" height="150" style="width:200px;height:150px;object-fit:cover;border-radius:8px" />
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+</Base>

@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import { url } from '../lib';
+
+interface Props {
+  titulo: string;
+  descripcion?: string;
+}
+const { titulo, descripcion = 'Relevamiento fotográfico de la flora de Siete de Abril: nativas, exóticas, cactáceas y hierbas, con nombre popular y científico.' } = Astro.props;
+const completo = titulo === 'Flora de Siete de Abril' ? titulo : `${titulo} · Flora de Siete de Abril`;
+
+const enlaces = [
+  ['Catálogo', 'catalogo/'],
+  ['Mapa', 'mapa/'],
+  ['Familias', 'familias/'],
+  ['Por identificar', 'por-identificar/'],
+  ['El lugar', 'el-lugar/'],
+  ['Colaborar', 'colaborar/'],
+  ['Créditos', 'creditos/'],
+];
+const actual = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{completo}</title>
+    <meta name="description" content={descripcion} />
+    <meta property="og:title" content={completo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <header class="sitio">
+      <div class="contenedor">
+        <a class="marca" href={url()}>🌿 Flora de Siete de Abril</a>
+        <nav aria-label="Principal">
+          {enlaces.map(([t, h]) => (
+            <a href={url(h)} aria-current={actual.endsWith('/' + h) ? 'page' : undefined}>{t}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main id="contenido" class="contenedor">
+      <slot />
+    </main>
+    <footer class="sitio">
+      <div class="contenedor">
+        Fotografías de Natalia Paz · Identificación de Carlos Navarro ·
+        <a href={url('creditos/')}>Créditos y licencia</a>
+      </div>
+    </footer>
+  </body>
+</html>

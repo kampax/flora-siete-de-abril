@@ -1,0 +1,54 @@
+---
+// Mapa Leaflet. Recibe puntos [{lat, lon, titulo, sub, href, img, tipo, habito, origen}].
+interface Props { puntos: any[]; id?: string; }
+const { puntos, id = 'mapa' } = Astro.props;
+---
+<div id={id} class="mapa" role="region" aria-label="Mapa de plantas fotografiadas" data-puntos={JSON.stringify(puntos)}></div>
+
+<script>
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
+
+  const colores: Record<string, string> = { especie: '#3f6b3a', pendiente: '#b9772c' };
+
+  document.querySelectorAll<HTMLElement>('.mapa').forEach((el) => {
+    const puntos = JSON.parse(el.dataset.puntos || '[]');
+    const mapa = L.map(el, { scrollWheelZoom: false }).setView([-26.34, -64.5], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(mapa);
+
+    const capa = L.featureGroup().addTo(mapa);
+    const marcas = puntos.map((p: any) => {
+      const m = L.circleMarker([p.lat, p.lon], {
+        radius: 8, weight: 2, color: '#fff', fillColor: colores[p.tipo] ?? '#3f6b3a', fillOpacity: 0.9,
+      });
+      const cont = document.createElement('div');
+      if (p.img) { const i = document.createElement('img'); i.src = p.img; i.alt = ''; cont.append(i); }
+      const a = document.createElement('a');
+      a.href = p.href; a.textContent = p.titulo; a.style.display = 'block'; a.style.fontWeight = '600';
+      cont.append(a);
+      if (p.sub) { const s = document.createElement('small'); s.textContent = p.sub; cont.append(s); }
+      m.bindPopup(cont);
+      return { m, p };
+    });
+
+    function pintar(filtro: (p: any) => boolean = () => true) {
+      capa.clearLayers();
+      marcas.forEach(({ m, p }: any) => { if (filtro(p)) capa.addLayer(m); });
+      if (capa.getLayers().length) mapa.fitBounds(capa.getBounds().pad(0.15), { maxZoom: 17 });
+    }
+    pintar();
+    (el as any)._pintar = pintar;
+    // Si el tamaño cambia (CSS que llega tarde, rotar el celular), recalcular y reencuadrar
+    let primera = true;
+    new ResizeObserver(() => {
+      mapa.invalidateSize();
+      if (primera && capa.getLayers().length) mapa.fitBounds(capa.getBounds().pad(0.15), { maxZoom: 17 });
+      primera = false;
+    }).observe(el);
+    // Evita que la rueda atrape el scroll de la página hasta que se toca el mapa
+    mapa.once('focus', () => mapa.scrollWheelZoom.enable());
+  });
+</script>
