@@ -1,12 +1,58 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import paisaje from '../assets/siete-de-abril-vias.jpg';
 ---
-<Base titulo="El lugar">
-  <h1>El lugar</h1>
-  <div class="texto">
-    <p>Siete de Abril está en la región del Chaco seco. El monte combina algarrobos, quebrachos, mistoles, cactus columnares y arbustos espinosos, mezclados con las plantas que la gente trajo a sus patios y veredas.</p>
-    <h2>Cómo se hizo el relevamiento</h2>
-    <p>Las fotos se tomaron entre el 4 y el 20 de septiembre de 2020, a fines del invierno y comienzo de la primavera, con teléfonos celulares. Por eso faltan las especies que florecen en verano y otoño: se van a ir sumando en nuevas salidas.</p>
-    <p class="aviso">Texto provisorio: Carlos y Natalia pueden ampliarlo con datos del lugar.</p>
+<Base titulo="El lugar" descripcion="Conocé Siete de Abril, una pequeña localidad y comuna rural del departamento Burruyacú, en el noreste de Tucumán, Argentina.">
+  <p class="eyebrow">NUESTRO PUEBLO · TUCUMÁN, ARGENTINA</p>
+  <h1>Siete de Abril</h1>
+  <p class="lugar-intro"><strong>Siete de Abril</strong> (o 7 de Abril) es una pequeña localidad y comuna rural ubicada en el departamento Burruyacú, al noreste de la provincia de Tucumán, Argentina. <a href="https://es.wikipedia.org/wiki/Siete_de_Abril_(Argentina)" aria-label="Fuente: Siete de Abril en Wikipedia">[1]</a></p>
+  <figure class="lugar-paisaje">
+    <Image src={paisaje} alt="Vías del ferrocarril entre la vegetación y los campos de Siete de Abril, bajo el cielo del atardecer" widths={[640, 1200, 1800]} sizes="(max-width: 600px) calc(100vw - 40px), (max-width: 1400px) 90vw, 1280px" width={1800} format="webp" loading="eager" />
+    <figcaption>El ferrocarril y el paisaje de Siete de Abril.</figcaption>
+  </figure>
+  <div class="lugar-contenido">
+    <section aria-labelledby="caracteristicas">
+      <p class="eyebrow">UN LUGAR CON HISTORIA</p>
+      <h2 id="caracteristicas">Características principales</h2>
+      <dl class="lugar-datos">
+        <dt>Ubicación</dt><dd>Se encuentra sobre la <strong>Ruta Nacional 34</strong>, a solo 1,5 km del límite con la provincia de Santiago del Estero. <a href="https://es.wikipedia.org/wiki/Siete_de_Abril_(Argentina)" aria-label="Fuente de ubicación: Wikipedia">[1]</a></dd>
+        <dt>Origen</dt><dd>Nació como una estación de ferrocarril y durante gran parte del siglo XX su economía giró en torno a los obrajes madereros de la región. <a href="https://es.wikipedia.org/wiki/Siete_de_Abril_(Argentina)" aria-label="Fuente histórica: Wikipedia">[1]</a> <a href="http://raicesmusical.blogspot.com/p/zambas-y-sus-versiones.html" aria-label="Fuente histórica: Raíces Musical">[2]</a></dd>
+        <dt>Población</dt><dd>Es una comunidad pequeña, de aproximadamente <strong>500 a 2.000 habitantes</strong>, según distintas estimaciones locales y censales. <span class="lugar-aclaracion">Rango orientativo; no corresponde a un único año censal.</span></dd>
+      </dl>
+    </section>
+    <section class="lugar-flora" aria-labelledby="flora-lugar">
+      <p class="eyebrow">EL PAISAJE Y SUS PLANTAS</p>
+      <h2 id="flora-lugar">Entre el monte y el pueblo</h2>
+      <p>Siete de Abril está en la región del Chaco seco. El monte combina algarrobos, quebrachos, mistoles, cactus columnares y arbustos espinosos, mezclados con las plantas que la gente trajo a sus patios y veredas.</p>
+      <h2>Cómo se hizo el relevamiento</h2>
+      <p>Las fotos del relevamiento se tomaron entre el 4 y el 20 de septiembre de 2020, a fines del invierno y comienzo de la primavera, con teléfonos celulares. Por eso faltan las especies que florecen en verano y otoño: se van a ir sumando en nuevas salidas.</p>
+    </section>
   </div>
+  <aside class="lugar-fuentes" aria-label="Fuentes sobre el lugar">
+    <span>Para conocer más</span>
+    <a href="https://es.wikipedia.org/wiki/Siete_de_Abril_(Argentina)">[1] Siete de Abril · Wikipedia ↗</a>
+    <a href="http://raicesmusical.blogspot.com/p/zambas-y-sus-versiones.html">[2] Raíces Musical · Zambas y sus versiones ↗</a>
+  </aside>
 </Base>
+<style>
+  .lugar-intro { max-width: 800px; font-size: 18px; color: var(--suave); line-height: 1.8; }
+  .lugar-intro strong { color: var(--texto); }
+  .lugar-paisaje { margin: 36px 0 56px; }
+  .lugar-paisaje img { width: 100%; height: auto; border-radius: 3px; }
+  .lugar-paisaje figcaption { font-size: 11px; color: var(--suave); padding-top: 12px; }
+  .lugar-contenido { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; }
+  .lugar-contenido h2 { font-size: 34px; }
+  .lugar-contenido .eyebrow { margin-bottom: 14px; }
+  .lugar-datos { margin: 28px 0 0; }
+  .lugar-datos dt { font-size: 13px; font-weight: 600; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--borde); }
+  .lugar-datos dd { margin: 8px 0 0; font-size: 15px; color: var(--suave); line-height: 1.85; }
+  .lugar-aclaracion { display: block; font-size: 11px; margin-top: 8px; }
+  .lugar-flora { padding: 30px; background: #eeefe6; align-self: start; }
+  .lugar-flora p:not(.eyebrow) { font-size: 14px; color: var(--suave); line-height: 1.85; }
+  .lugar-flora h2:not(:first-of-type) { margin-top: 32px; font-size: 28px; }
+  .lugar-fuentes { display: flex; flex-wrap: wrap; gap: 12px 25px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--borde); font-size: 11px; }
+  .lugar-fuentes span { color: var(--suave); }
+  @media(max-width:900px) { .lugar-contenido { gap: 32px; } }
+  @media(max-width:600px) { .lugar-intro { font-size: 16px; } .lugar-contenido { grid-template-columns: 1fr; } .lugar-paisaje { margin: 26px 0 36px; } .lugar-flora { padding: 24px; } .lugar-contenido h2 { font-size: 30px; } }
+</style>
