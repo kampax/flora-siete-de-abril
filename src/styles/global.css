@@ -59,3 +59,9 @@ main>section.nuestro-pueblo{margin:0;padding:65px 0;display:grid;grid-template-c
 .pueblo-ambientes{display:flex;gap:25px;border-top:1px solid var(--borde);padding-top:20px;margin-top:25px;font-size:11px;color:var(--verde)}
 @media(max-width:900px){.portada-pueblo{min-height:600px}.portada-pueblo-texto{padding:50px 35px 95px}.portada-pie{left:35px;right:35px}.portada-pueblo h1{font-size:78px}main>section.nuestro-pueblo{gap:35px}.pueblo-relato p:first-child{font-size:16px}}
 @media(max-width:600px){main>section.portada-pueblo{margin:-32px -20px 0}.portada-pueblo{min-height:590px;align-items:start}.paisaje-pueblo{object-position:57% center}.portada-pueblo::before{background:linear-gradient(180deg,rgba(18,30,25,.7),rgba(18,30,25,.32) 55%,rgba(18,30,25,.35))}.portada-pueblo-texto{padding:45px 25px 90px}.portada-pueblo .eyebrow{font-size:8px;letter-spacing:1.6px;margin-bottom:30px}.portada-pueblo h1{font-size:76px;max-width:340px;line-height:1}.portada-pueblo h1 span{font-size:31px;margin-bottom:14px}.portada-pueblo-texto>p:not(.eyebrow){font-size:15px}.portada-acciones{gap:20px;margin-top:25px}.portada-pie{left:25px;right:25px;font-size:9px}.portada-pie span:last-child{display:none}main>section.nuestro-pueblo{grid-template-columns:1fr;padding:40px 0;gap:30px}.nuestro-pueblo h2{font-size:40px}.pueblo-relato{font-size:14px}.pueblo-ambientes{gap:20px}}
+
+/* Ilustraciones botánicas vectoriales de los grupos. */
+.grupo-icono{display:block;width:52px;height:52px;margin-bottom:20px;color:#567151}
+.grupo-icono svg{display:block;width:100%;height:100%}
+.grupos a:hover .grupo-icono{color:var(--verde-osc)}
+@media(max-width:600px){.grupo-icono{width:44px;height:44px;margin-bottom:16px}}

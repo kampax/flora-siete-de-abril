@@ -1,0 +1,32 @@
+---
+interface Props { habito: string }
+const { habito } = Astro.props;
+const trazos: Record<string, string[]> = {
+  'árbol': [
+    'M30 53V30M30 41L21 33M30 37L39 28M23 54H37',
+    'M18 38C8 38 6 27 13 22C9 14 17 7 24 10C27 2 39 5 40 12C49 10 55 19 50 26C57 35 44 43 36 38',
+  ],
+  arbusto: [
+    'M30 54V32M30 46L17 35M30 44L43 33M22 54H38',
+    'M17 44C6 44 3 33 10 28C5 20 15 12 22 18C24 8 37 8 40 18C49 12 57 21 51 29C59 36 50 46 42 43',
+    'M20 25L24 30M39 23L35 29',
+  ],
+  hierba: [
+    'M30 54V25M30 45C19 46 12 39 12 33C22 32 29 37 30 45ZM30 37C41 38 47 30 47 24C37 24 31 29 30 37Z',
+    'M30 24C21 25 19 18 24 15C17 10 24 4 30 10C36 4 43 10 36 15C41 18 39 25 30 24Z',
+    'M28 17H32M21 54H39',
+  ],
+  cactus: [
+    'M23 54V38H16C10 38 7 34 7 28V20C7 14 15 14 15 20V28C15 30 16 30 18 30H23V13C23 3 37 3 37 13V36H42C44 36 45 35 45 33V25C45 19 53 19 53 25V33C53 41 49 44 42 44H37V54',
+    'M30 14V49M18 54H42M23 18H20M37 25H40M7 24H4M53 29H56',
+  ],
+  enredadera: [
+    'M25 54C43 42 18 31 30 19C35 13 38 9 35 5',
+    'M30 43C18 44 11 37 12 30C23 29 29 35 30 43ZM28 29C40 30 48 23 47 16C37 14 29 20 28 29Z',
+    'M32 16C21 17 17 11 18 5C27 4 32 9 32 16ZM35 39C47 42 51 35 47 32C44 30 42 33 44 35',
+  ],
+};
+---
+<svg viewBox="0 0 60 60" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {trazos[habito]?.map(d => <path d={d} />)}
+</svg>

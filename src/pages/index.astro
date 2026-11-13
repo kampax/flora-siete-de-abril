@@ -2,12 +2,13 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Tarjeta from '../components/Tarjeta.astro';
+import IconoHabito from '../components/IconoHabito.astro';
 import { url, todasLasFotos } from '../lib';
 const especies = await getCollection('especies');
 const grupos = new Set(todasLasFotos.filter(f => !f.especie).map(f => f.grupo)).size;
 const seleccion = ['plumbago-auriculata', 'trichocereus-terscheckii', 'leonurus-sibiricus', 'argemone-subfusiformis'];
 const destacadas = seleccion.map(id => especies.find(e => e.id === id)).filter(Boolean);
-const habitos = [{id:'árbol', nombre:'Árboles', detalle:'Bajo la sombra', icono:'♧'}, {id:'arbusto', nombre:'Arbustos', detalle:'A la altura del monte', icono:'❧'}, {id:'hierba', nombre:'Hierbas', detalle:'Mirar de cerca', icono:'⚘'}, {id:'cactus', nombre:'Cactus', detalle:'Entre espinas', icono:'♧'}, {id:'enredadera', nombre:'Enredaderas', detalle:'Hacia la luz', icono:'〰'}].filter(h => especies.some(e => e.data.habito === h.id));
+const habitos = [{id:'árbol', nombre:'Árboles', detalle:'Bajo la sombra'}, {id:'arbusto', nombre:'Arbustos', detalle:'A la altura del monte'}, {id:'hierba', nombre:'Hierbas', detalle:'Mirar de cerca'}, {id:'cactus', nombre:'Cactus', detalle:'Entre espinas'}, {id:'enredadera', nombre:'Enredaderas', detalle:'Hacia la luz'}].filter(h => especies.some(e => e.data.habito === h.id));
 ---
 <Base titulo="Flora de Siete de Abril">
   <section class="portada-pueblo" aria-labelledby="titulo-pueblo">
@@ -32,7 +33,7 @@ const habitos = [{id:'árbol', nombre:'Árboles', detalle:'Bajo la sombra', icon
   </section>
   <section class="home-seccion">
     <div class="seccion-titulo"><div><p class="eyebrow">01 / EXPLORAR</p><h2>Las plantas que nos rodean.</h2></div></div>
-    <div class="grupos">{habitos.map(h => <a href={url(`catalogo/?habito=${encodeURIComponent(h.id)}`)}><span class="grupo-icono" aria-hidden="true">{h.icono}</span><strong>{h.nombre}</strong><small>{h.detalle}</small><span class="grupo-flecha" aria-hidden="true">↗</span></a>)}</div>
+    <div class="grupos">{habitos.map(h => <a href={url(`catalogo/?habito=${encodeURIComponent(h.id)}`)}><span class="grupo-icono" aria-hidden="true"><IconoHabito habito={h.id} /></span><strong>{h.nombre}</strong><small>{h.detalle}</small><span class="grupo-flecha" aria-hidden="true">↗</span></a>)}</div>
   </section>
   <section class="home-seccion">
     <div class="seccion-titulo"><div><p class="eyebrow">02 / EL CATÁLOGO</p><h2>Vale la pena detenerse a mirar.</h2></div><a class="enlace-secundario" href={url('catalogo/')}>Todas las especies ↗</a></div>
