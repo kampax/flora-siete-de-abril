@@ -14,7 +14,9 @@ const familias = uniq(especies.map((e) => e.data.familia));
 const colores = uniq(especies.map((e) => e.data.color_flor).filter(Boolean) as string[]);
 ---
 <Base titulo="Catálogo">
+  <p class="eyebrow">EL REGISTRO BOTÁNICO</p>
   <h1>Catálogo de especies</h1>
+  <p class="catalogo-intro">Encontrá las plantas del pueblo. Buscá un nombre o explorá por sus características.</p>
   <input class="buscador" id="q" type="search" placeholder="Buscar por nombre popular, científico o familia" aria-label="Buscar" />
 
   <div class="filtros">

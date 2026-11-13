@@ -17,6 +17,7 @@ const busqueda = normalizar([d.nombre_cientifico, d.familia, ...d.nombres_comune
       ? <img class="img" src={fotoMini(principal.archivo)} alt={`${d.nombres_comunes[0]} (${d.nombre_cientifico}): ${principal.parte}`} loading="lazy" width="480" height="360" />
       : <div class="sinfoto" aria-hidden="true">Sin foto todavía</div>}
     <div class="cuerpo">
+      <div class="tarjeta-familia">{d.familia}<span aria-hidden="true">↗</span></div>
       <h3>{d.nombres_comunes[0]}</h3>
       <div class="sci"><em>{d.nombre_cientifico}</em></div>
       <div class="etiquetas">

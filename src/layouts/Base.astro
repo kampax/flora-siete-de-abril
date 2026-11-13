@@ -37,8 +37,12 @@ const actual = Astro.url.pathname;
     <a class="saltar" href="#contenido">Saltar al contenido</a>
     <header class="sitio">
       <div class="contenedor">
-        <a class="marca" href={url()}>🌿 Flora de Siete de Abril</a>
-        <nav aria-label="Principal">
+        <a class="marca" href={url()} aria-label="Flora de Siete de Abril, inicio">
+          <svg viewBox="0 0 40 48" fill="none" aria-hidden="true"><path d="M20 43V12M20 29C5 30 5 15 5 15S20 14 20 29ZM20 21C34 22 35 5 35 5S20 6 20 21Z" stroke="currentColor" stroke-width="1.6"/></svg>
+          <span>Flora <i>de</i> Siete de Abril<small>UN REGISTRO BOTÁNICO LOCAL</small></span>
+        </a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="navegacion" type="button">Menú <span aria-hidden="true">☰</span></button>
+        <nav id="navegacion" aria-label="Principal">
           {enlaces.map(([t, h]) => (
             <a href={url(h)} aria-current={actual.endsWith('/' + h) ? 'page' : undefined}>{t}</a>
           ))}
@@ -50,9 +54,24 @@ const actual = Astro.url.pathname;
     </main>
     <footer class="sitio">
       <div class="contenedor">
-        Fotografías de Natalia Paz · Identificación de Carlos Navarro ·
-        <a href={url('creditos/')}>Créditos y licencia</a>
+        <div><a class="footer-brand" href={url()}>Flora de Siete de Abril</a><p>Conocer lo que crece cerca.</p></div>
+        <div class="footer-creditos">Fotografías de Natalia Paz<br/>Identificación de Carlos Navarro<br/><a href={url('creditos/')}>Créditos y licencia ↗</a></div>
       </div>
     </footer>
   </body>
 </html>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector('header nav');
+  toggle?.addEventListener('click', () => {
+    const abierto = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(abierto));
+    nav?.classList.toggle('abierto', abierto);
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      toggle.setAttribute('aria-expanded', 'false'); nav?.classList.remove('abierto'); toggle.focus();
+    }
+  });
+</script>

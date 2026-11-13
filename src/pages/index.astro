@@ -2,37 +2,42 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Tarjeta from '../components/Tarjeta.astro';
-import { url, todasLasFotos, normalizar } from '../lib';
-
+import { url, todasLasFotos } from '../lib';
 const especies = await getCollection('especies');
-const grupos = new Set(todasLasFotos.map((f) => f.grupo)).size;
-const destacadas = especies.slice(0, 4);
-const habitos = ['árbol', 'arbusto', 'hierba', 'cactus', 'enredadera'].filter((h) => especies.some((e) => e.data.habito === h));
+const grupos = new Set(todasLasFotos.filter(f => !f.especie).map(f => f.grupo)).size;
+const seleccion = ['plumbago-auriculata', 'trichocereus-terscheckii', 'leonurus-sibiricus', 'argemone-subfusiformis'];
+const destacadas = seleccion.map(id => especies.find(e => e.id === id)).filter(Boolean);
+const habitos = [{id:'árbol', nombre:'Árboles', detalle:'Bajo la sombra', icono:'♧'}, {id:'arbusto', nombre:'Arbustos', detalle:'A la altura del monte', icono:'❧'}, {id:'hierba', nombre:'Hierbas', detalle:'Mirar de cerca', icono:'⚘'}, {id:'cactus', nombre:'Cactus', detalle:'Entre espinas', icono:'♧'}, {id:'enredadera', nombre:'Enredaderas', detalle:'Hacia la luz', icono:'〰'}].filter(h => especies.some(e => e.data.habito === h.id));
 ---
 <Base titulo="Flora de Siete de Abril">
-  <section class="hero">
-    <h1>Flora de Siete de Abril</h1>
-    <p>Un relevamiento fotográfico de las plantas del pueblo y su monte: árboles nativos y exóticos, cactáceas y hierbas. Buscá una planta por su nombre popular, su nombre científico o su familia.</p>
-    <form action={url('catalogo/')} role="search">
-      <input class="buscador" type="search" name="q" placeholder="Buscar: algarrobo, Fabaceae, cardón…" aria-label="Buscar una planta" />
-    </form>
-    <div class="cifras">
-      <div class="cifra"><b>{especies.length}</b>especies con ficha</div>
-      <div class="cifra"><b>{todasLasFotos.length}</b>fotos</div>
-      <div class="cifra"><b>{grupos}</b>plantas por identificar</div>
+  <section class="portada-pueblo" aria-labelledby="titulo-pueblo">
+    <img class="paisaje-pueblo" src={url('lugar/siete-de-abril-atardecer.jpg')} alt="Los silos de Siete de Abril junto a las vías, con el sol cayendo detrás de los árboles" width="3161" height="2181" fetchpriority="high" />
+    <div class="portada-pueblo-texto">
+      <p class="eyebrow">TUCUMÁN, ARGENTINA · NUESTRO PUEBLO</p>
+      <h1 id="titulo-pueblo"><span>Flora de</span>Siete de Abril</h1>
+      <p>Las plantas de nuestro pueblo.<br/>Las historias que crecen cerca.</p>
+      <div class="portada-acciones"><a class="boton-claro" href={url('catalogo/')}>Conocé nuestras plantas <span aria-hidden="true">↗</span></a><a href="#nuestro-pueblo">Recorré el pueblo <span aria-hidden="true">↓</span></a></div>
     </div>
+    <div class="portada-pie"><span>Siete de Abril, al atardecer</span><span>Un lugar para mirar de cerca</span></div>
   </section>
-
-  <h2>Explorar por grupo</h2>
-  <div class="grupos">
-    {habitos.map((h) => <a href={url(`catalogo/?habito=${encodeURIComponent(h)}`)}>{h[0].toUpperCase() + h.slice(1)}s</a>)}
-    <a href={url('mapa/')}>Mapa</a>
-    <a href={url('por-identificar/')}>Por identificar</a>
-  </div>
-
-  <h2>Algunas especies</h2>
-  <ul class="grilla">
-    {destacadas.map((e) => <Tarjeta slug={e.id} datos={e.data} />)}
-  </ul>
-  <p><a href={url('catalogo/')}>Ver todo el catálogo →</a></p>
+  <section class="nuestro-pueblo" id="nuestro-pueblo" aria-labelledby="titulo-lugar">
+    <div><p class="eyebrow">EL LUGAR QUE NOS UNE</p><h2 id="titulo-lugar">Nuestro pueblo,<br/><em>nuestras plantas.</em></h2><a class="enlace-secundario" href={url('el-lugar/')}>Más sobre Siete de Abril ↗</a></div>
+    <div class="pueblo-relato"><p>En Siete de Abril, Tucumán, la flora también forma parte de la vida cotidiana: los árboles de la vereda, las plantas que cuidamos en casa y las especies del monte.</p><p>Este proyecto nace para conocer y compartir esa diversidad. Reúne fotografías, nombres populares y científicos de las plantas del pueblo, desde las nativas del Chaco seco hasta las ornamentales que llegaron de otros lugares.</p><div class="pueblo-ambientes"><span>El monte</span><span>Las veredas</span><span>Los patios</span></div></div>
+  </section>
+  <section class="registro" aria-label="El registro en números">
+    <p>La flora de Siete de Abril, en imágenes.<br/><em>Un proyecto que sigue creciendo.</em></p>
+    <div><b>{especies.length}</b><span>especies con ficha</span></div>
+    <div><b>{todasLasFotos.length}</b><span>fotografías del lugar</span></div>
+    <div><b>{grupos}</b><span>grupos por identificar</span></div>
+  </section>
+  <section class="home-seccion">
+    <div class="seccion-titulo"><div><p class="eyebrow">01 / EXPLORAR</p><h2>Las plantas que nos rodean.</h2></div></div>
+    <div class="grupos">{habitos.map(h => <a href={url(`catalogo/?habito=${encodeURIComponent(h.id)}`)}><span class="grupo-icono" aria-hidden="true">{h.icono}</span><strong>{h.nombre}</strong><small>{h.detalle}</small><span class="grupo-flecha" aria-hidden="true">↗</span></a>)}</div>
+  </section>
+  <section class="home-seccion">
+    <div class="seccion-titulo"><div><p class="eyebrow">02 / EL CATÁLOGO</p><h2>Vale la pena detenerse a mirar.</h2></div><a class="enlace-secundario" href={url('catalogo/')}>Todas las especies ↗</a></div>
+    <ul class="grilla destacadas">{destacadas.map(e => e && <Tarjeta slug={e.id} datos={e.data} />)}</ul>
+    <form class="busqueda-inicio" action={url('catalogo/')} role="search"><label for="buscar-inicio">¿Qué planta estás buscando?</label><div><input id="buscar-inicio" class="buscador" type="search" name="q" placeholder="Nombre popular, científico o familia…"/><button class="boton-principal" type="submit">Buscar <span aria-hidden="true">→</span></button></div></form>
+  </section>
+  <section class="invitacion"><div><p class="eyebrow">03 / UN REGISTRO COMPARTIDO</p><h2>Entre todos, conocemos<br/>mejor nuestro pueblo.</h2><p>¿Reconocés una planta de tu patio o de tu vereda? Tu mirada puede ayudar a completar este registro de Siete de Abril.</p><a class="boton-claro" href={url('por-identificar/')}>Ver plantas por identificar ↗</a></div><div class="invitacion-lateral"><span aria-hidden="true">❧</span><p>Observar.<br/>Reconocer.<br/><em>Compartir.</em></p><a href={url('colaborar/')}>Cómo colaborar →</a></div></section>
 </Base>
