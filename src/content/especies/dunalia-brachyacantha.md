@@ -14,4 +14,6 @@ fotos:
     fecha: 2020-09-06
     principal: true
 ---
-**Ficha provisoria.** Nombre tomado de los comentarios del álbum de Google Fotos. Familia, origen y nombres populares por verificar contra Flora Argentina.
+Arbusto o arbolito de aproximadamente 1,2 a 4 m de altura. Tiene hojas simples, ovadas a elípticas, con pecíolo visible y escasos pelos al madurar; las ramas pueden presentar pequeñas emergencias o espinas.
+
+Las **flores colgantes, violetas o azul oscuro**, nacen en las axilas de las hojas, solas o en pequeños grupos. La corola forma un tubo que se ensancha hacia la boca, de alrededor de 2 a 3,4 cm de largo. Los frutos son bayas pequeñas, de unos 7 a 9 mm, que toman tonos amarillentos, rojizos o anaranjados. Su distribución comprende Bolivia y el noroeste y centro de Argentina, principalmente en ambientes serranos y montanos.

@@ -11,6 +11,6 @@ color_flor: "amarillo"
 confianza_id: "confirmada"
 identificado_por: "Carlos Navarro"
 ---
-**Ficha de prueba.** El texto y los datos de floración están por verificar contra Flora Argentina.
+Árbol de copa amplia, aproximadamente hemisférica, que puede alcanzar unos 15 m de altura. Sus hojas se dividen en pocos pares de ejes secundarios, cada uno con numerosos folíolos pequeños, estrechos y enfrentados.
 
-Árbol típico del Chaco seco. Se reconoce por las hojas compuestas con muchos folíolos pequeños, las espinas en pares y las largas vainas amarillentas.
+Las flores, blanco verdosas a amarillentas, se agrupan en **espigas alargadas**. El fruto es una legumbre aplanada, de alrededor de 12 a 25 cm de largo, amarillenta al madurar, recta o curva. La combinación de copa extendida, follaje fino y vainas claras permite reconocerlo. En Flora Argentina se trata actualmente dentro de *Neltuma alba*.

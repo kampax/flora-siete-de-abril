@@ -14,4 +14,6 @@ fotos:
     fecha: 2020-09-06
     principal: true
 ---
-**Ficha provisoria.** Nombre tomado de los comentarios del álbum de Google Fotos. Familia, origen y nombres populares por verificar contra Flora Argentina.
+Arbusto de 1 a 2 m, que también puede alcanzar porte de arbolito. Las ramas suelen tener espinas; las hojas son simples, delgadas y de contorno ovado a elíptico.
+
+Se reconoce especialmente por las **flores tubulares de color violeta intenso**, agrupadas sobre brotes cortos. El tubo de la corola suele medir entre 1 y 2 cm, con pequeños lóbulos en su extremo; los estambres permanecen dentro de él. Los frutos son bayas redondeadas u ovoides que pueden ser rojas, anaranjadas o púrpura oscuro. Es propia de Bolivia, Uruguay y el norte y centro de Argentina, principalmente de ambientes chaqueños.

@@ -14,4 +14,6 @@ fotos:
     fecha: 2020-09-08
     principal: true
 ---
-**Ficha provisoria.** Nombre tomado de los comentarios del álbum de Google Fotos. Familia, origen y nombres populares por verificar contra Flora Argentina.
+Arbusto o arbolito de unos 2 a 5 m de altura, con ramas tortuosas y corteza lisa. Las hojas son simples y sin pelos, elípticas o más anchas hacia el extremo; su punta suele ser redondeada y puede presentar una pequeña escotadura.
+
+Las flores, reunidas en grupos, son perfumadas y de tonos blanco amarillentos a verdosos. Destacan por sus **numerosos estambres largos**, que sobresalen ampliamente de los pétalos. El fruto es alargado, semejante a una vaina, y contiene numerosas semillas. Habita ambientes chaqueños y sectores de transición hacia las Yungas.

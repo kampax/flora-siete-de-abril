@@ -15,4 +15,6 @@ fotos:
     fecha: 2020-09-06
     principal: true
 ---
-**Ficha provisoria.** Nombre tomado de los comentarios del álbum de Google Fotos. Familia, origen y nombres populares por verificar contra Flora Argentina.
+Hierba perenne que crece a partir de un bulbo subterráneo. Sus hojas nacen desde la base, tienen láminas anchas y pecíolos bien diferenciados.
+
+El tallo floral se eleva por encima del follaje y termina en un grupo de flores pediceladas, dispuestas como una sombrilla. Las piezas de la flor se unen en un tubo basal y se abren hacia el extremo; los filamentos de los estambres presentan apéndices en su base. El **bulbo, las hojas anchas y la inflorescencia elevada** son rasgos útiles para reconocer este grupo. La especie es originaria del noroeste de Sudamérica y también se encuentra citada como *Urceolina candida*.

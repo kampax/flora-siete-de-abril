@@ -23,7 +23,6 @@ const puntos = todasLasFotos
     return { lat, lon, titulo: d.nombres_comunes[0], sub: f.fecha.slice(0, 10), href: url(`especies/${e.id}/`), img: fotoMini(f.id), tipo: 'especie' };
   });
 
-const confianza = { confirmada: 'Identificación confirmada', probable: 'Identificación probable', 'a revisar': 'Identificación a revisar' }[d.confianza_id];
 ---
 <Base titulo={d.nombres_comunes[0]} descripcion={`${d.nombres_comunes.join(', ')} (${d.nombre_cientifico}), ${d.familia}. ${d.origen}.`}>
   <p><a href={url('catalogo/')}>← Catálogo</a></p>
@@ -65,7 +64,6 @@ const confianza = { confirmada: 'Identificación confirmada', probable: 'Identif
         {d.ambiente.length > 0 && <><dt>Dónde se ve</dt><dd>{d.ambiente.join(', ')}</dd></>}
         {d.color_flor && <><dt>Color de flor</dt><dd>{d.color_flor}</dd></>}
         {d.conservacion && <><dt>Conservación</dt><dd>{d.conservacion}</dd></>}
-        <dt>Identificación</dt><dd>{confianza}, por {d.identificado_por}</dd>
         {d.nombres_comunes.length > 1 && <><dt>Otros nombres</dt><dd>{d.nombres_comunes.slice(1).join(', ')}</dd></>}
       </dl>
 

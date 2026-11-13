@@ -1,0 +1,126 @@
+{
+  "fecha_consulta": "2026-11-13",
+  "alcance": "Síntesis originales para Cómo reconocerla, por nombre de especie. No constituyen validación de fotos ni revisión de los restantes campos de origen, ambiente o fenología. Los metadatos históricos de identificación se conservan pero no se muestran en la ficha. Las fuentes quedan aquí para revisión editorial, sin añadir un bloque público de referencias.",
+  "especies": {
+    "argemone-subfusiformis": {
+      "fuentes": [
+        "https://www.sinavimo.gob.ar/plaga/argemone-subfusiformis"
+      ],
+      "consulta_flora": "https://buscador.floraargentina.edu.ar/species/details/2177",
+      "nota": "Flora Argentina devolvió error 500 al abrir el detalle; síntesis morfológica de SENASA."
+    },
+    "asclepias-curassavica": {
+      "fuentes": [
+        "https://bibliotecavirtual.unl.edu.ar/bitstream/handle/11185/5532/botanicasistematica3.pdf?isAllowed=y&sequence=1",
+        "https://sedici.unlp.edu.ar/bitstream/handle/10915/68659/Di%C3%A1sporas_y_semillas_-_Parte_III.pdf-PDFA.pdf?isAllowed=y&sequence=4"
+      ],
+      "consulta_flora": "https://buscador.floraargentina.edu.ar/species/details/8624",
+      "nota": "Detalle de Flora Argentina con error 500; morfología complementada con UNL y UNLP."
+    },
+    "clematis-montevidensis": {
+      "fuentes": [
+        "https://sib.gob.ar/especies/clematis-montevidensis"
+      ],
+      "consulta_flora": "https://buscador.floraargentina.edu.ar/species/details/1278",
+      "nota": "Se conserva el nombre del sitio y se describe el taxón tratado como Clematis montevidensis en SIB. Flora Argentina remite C. montevidensis var. montevidensis a C. campestris. Revisar criterio taxonómico, no se cambió la identificación."
+    },
+    "cynophalla-retusa": {
+      "fuentes": [
+        "https://buscador.floraargentina.edu.ar/species/details/193448"
+      ],
+      "nota": "Se omite la medida del fruto: la transcripción del catálogo presenta unidades aparentemente inconsistentes."
+    },
+    "dieffenbachia-seguine": {
+      "fuentes": [
+        "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:86911-1/general-information"
+      ],
+      "nota": "Sin resultado por el nombre exacto en Flora Argentina. Descripción de Flora of Tropical East Africa y CATE Araceae, alojadas por Kew."
+    },
+    "dunalia-brachyacantha": {
+      "fuentes": [
+        "https://buscador.floraargentina.edu.ar/species/details/3715"
+      ],
+      "nota": "La descripción corresponde al nombre de la ficha. Su hábitat montano no confirma la identidad de la foto de Siete de Abril."
+    },
+    "eucharis-candida": {
+      "fuentes": [
+        "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:261572-2/general-information",
+        "https://apirs.plants.ifas.ufl.edu/site/assets/files/380407/380407.pdf"
+      ],
+      "nota": "Sin resultado en Flora Argentina. Kew acepta Urceolina candida. Rasgos vegetativos y florales generales basados en el tratamiento de Eucharis de Acevedo-Rodríguez y Strong (2005), sin incorporar medidas diagnósticas específicas no comprobadas."
+    },
+    "leonurus-sibiricus": {
+      "fuentes": [
+        "https://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200019765"
+      ],
+      "consulta_flora": "https://buscador.floraargentina.edu.ar/species/details/9285",
+      "nota": "IMPORTANTE: Flora Argentina vincula Leonurus sibiricus auct. non L. con L. japonicus. Se conserva L. sibiricus L. y se describe esa especie con Flora of China, no se transfiere la descripción de L. japonicus. Revisar la determinación y el origen naturalizado de la ficha."
+    },
+    "lepidium-bonariense": {
+      "fuentes": [
+        "https://buscador.floraargentina.edu.ar/species/details/24399"
+      ]
+    },
+    "lycium-cestroides": {
+      "fuentes": [
+        "https://buscador.floraargentina.edu.ar/species/details/2860"
+      ]
+    },
+    "melia-azedarach": {
+      "fuentes": [
+        "https://buscador.floraargentina.edu.ar/species/details/25404"
+      ]
+    },
+    "nerium-oleander": {
+      "fuentes": [
+        "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:80460-1/general-information"
+      ],
+      "nota": "Sin resultado por el nombre exacto en Flora Argentina. Descripción de Kew Species Profiles."
+    },
+    "phoenix-canariensis": {
+      "fuentes": [
+        "https://www.nparks.gov.sg/florafaunaweb/flora/2/6/2662"
+      ],
+      "consulta_flora": "https://buscador.floraargentina.edu.ar/species/details/34995",
+      "nota": "Registro de Flora Argentina sin descripción; complemento de NParks."
+    },
+    "plumbago-auriculata": {
+      "fuentes": [
+        "https://pza.sanbi.org/plumbago-auriculata"
+      ],
+      "nota": "Sin resultado por el nombre exacto en Flora Argentina; descripción de SANBI."
+    },
+    "prosopis-alba": {
+      "fuentes": [
+        "https://buscador.floraargentina.edu.ar/species/details/200674"
+      ],
+      "nota": "Flora Argentina acepta Neltuma alba var. alba. Se conserva Prosopis alba en el sitio, sin determinar variedad para la observación local."
+    },
+    "prosopis-kuntzei": {
+      "fuentes": [
+        "https://buscador.floraargentina.edu.ar/species/details/200700"
+      ],
+      "nota": "Flora Argentina acepta Neltuma kuntzei; se conserva el nombre Prosopis kuntzei del sitio."
+    },
+    "saccharum-spontaneum": {
+      "fuentes": [
+        "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:420031-1/general-information"
+      ],
+      "nota": "Sin resultado por el nombre exacto en Flora Argentina; descripción de Flora Zambesiaca y Flora of Tropical East Africa en Kew."
+    },
+    "stetsonia-coryne": {
+      "fuentes": [
+        "https://edunse.unse.edu.ar/libros/digitales/%C3%81rboles%20aut%C3%B3ctonos%20de%20Santiago%20del%20Estero.pdf"
+      ],
+      "consulta_flora": "https://buscador.floraargentina.edu.ar/species/details/7557",
+      "nota": "Registro de Flora Argentina sin descripción. Complemento de Árboles autóctonos de Santiago del Estero (UNSE), pp. 172–173."
+    },
+    "trichocereus-terscheckii": {
+      "fuentes": [
+        "https://sib.gob.ar/especies/trichocereus-terscheckii"
+      ],
+      "consulta_flora": "https://buscador.floraargentina.edu.ar/species/details/6878",
+      "nota": "Registro de Flora Argentina sin descripción. SIB reproduce Flora de San Juan (Kiesling, 2003). Se omite la medida del fruto por posible error de transcripción."
+    }
+  }
+}

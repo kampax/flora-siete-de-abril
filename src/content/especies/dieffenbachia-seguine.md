@@ -15,4 +15,6 @@ fotos:
     fecha: 2020-09-06
     principal: true
 ---
-**Ficha provisoria.** Nombre tomado de los comentarios del álbum de Google Fotos. Familia, origen y nombres populares por verificar contra Flora Argentina.
+Planta de tallos carnosos y verdes, con marcas anulares dejadas por las hojas antiguas. Las hojas son grandes, ovaladas a alargadas, con punta marcada y pecíolos que envainan parte del tallo.
+
+En muchas formas cultivadas, la lámina verde tiene **manchas o áreas blancas, crema o verde claro**. La distribución de estas manchas varía entre cultivares. Las flores son pequeñas y se agrupan en una espiga carnosa llamada espádice, acompañada por una envoltura verde denominada espata. Es una especie de América tropical, ampliamente cultivada por su follaje.

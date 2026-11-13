@@ -15,4 +15,6 @@ fotos:
     fecha: 2020-09-20
     principal: true
 ---
-**Ficha provisoria.** Nombre tomado de los comentarios del álbum de Google Fotos. Familia, origen y nombres populares por verificar contra Flora Argentina.
+Palmera de tronco único, grueso y erguido, con cicatrices de las hojas antiguas. En la parte superior desarrolla una copa densa de hojas largas y arqueadas, divididas en numerosos folíolos estrechos.
+
+En la base de cada hoja, algunos folíolos se transforman en **espinas rígidas**. Las flores son pequeñas, blanco amarillentas, agrupadas en grandes inflorescencias; los frutos maduros toman tonos amarillos a anaranjados. El tronco robusto y la copa abundante ayudan a reconocerla. Es originaria de las Islas Canarias y se cultiva como ornamental.

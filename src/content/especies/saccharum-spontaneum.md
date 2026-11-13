@@ -15,4 +15,6 @@ fotos:
     fecha: 2020-09-06
     principal: true
 ---
-**Ficha provisoria.** Nombre tomado de los comentarios del álbum de Google Fotos. Familia, origen y nombres populares por verificar contra Flora Argentina.
+Gramínea perenne que se extiende mediante rizomas y desarrolla cañas erectas de unos 2 a 4 m, o más. Las hojas son muy largas y estrechas, semejantes a cintas.
+
+Al florecer produce **panojas grandes de aspecto sedoso y blanquecino**. Ese aspecto se debe a los pelos largos que acompañan a las pequeñas espiguillas. Las panojas pueden medir aproximadamente 25 a 60 cm de largo. El porte de caña, las hojas lineares y las inflorescencias plumosas son sus rasgos más visibles; para diferenciarla de otras gramíneas altas conviene observar la planta en flor.

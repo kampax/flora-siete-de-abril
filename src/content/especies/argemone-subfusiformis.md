@@ -17,6 +17,6 @@ fotos:
     fecha: 2020-09-04
     principal: true
 ---
-**Ficha de prueba.** Datos por verificar contra Flora Argentina.
+Hierba de porte erguido, anual o de corta duración, que puede alcanzar aproximadamente un metro de altura. Los tallos se ramifican y llevan espinas fuertes, a veces dirigidas hacia atrás.
 
-Hierba espinosa de flores amarillas grandes, frecuente en banquinas y terrenos removidos.
+Las **flores amarillo limón, con seis pétalos**, son el rasgo más llamativo para reconocerla. El conjunto de flores amarillas y tallos espinosos ayuda a distinguirla de otras hierbas de terrenos abiertos. Se establece con facilidad en suelos removidos y bien drenados, incluidos ambientes relativamente secos.

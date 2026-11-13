@@ -15,4 +15,6 @@ fotos:
     fecha: 2020-09-08
     principal: true
 ---
-**Ficha provisoria.** Nombre tomado de los comentarios del álbum de Google Fotos. Familia, origen y nombres populares por verificar contra Flora Argentina.
+Arbusto de ramas largas y apoyantes, que puede extenderse sobre otras plantas o estructuras. Las hojas son delgadas, verdes por arriba y más grisáceas por debajo; la base del pecíolo presenta pequeñas expansiones que abrazan el tallo.
+
+Las flores se reúnen en grupos y suelen ser **celestes**, aunque existen formas blancas y de azul más intenso. El cáliz tiene pelos glandulares pegajosos, un detalle útil al observar las flores de cerca. Es originario del sur de África y muy difundido en jardines.

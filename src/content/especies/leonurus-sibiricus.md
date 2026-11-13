@@ -15,4 +15,6 @@ fotos:
     fecha: 2020-09-20
     principal: true
 ---
-**Ficha provisoria.** Nombre tomado de los comentarios del álbum de Google Fotos. Familia, origen y nombres populares por verificar contra Flora Argentina.
+Hierba anual o bienal de tallos erectos y finamente pelosos, normalmente de 20 a 80 cm de altura. Las hojas se dividen profundamente en tres partes, y cada una vuelve a dividirse en segmentos estrechos.
+
+Las flores se disponen en **grupos densos alrededor del tallo**, formando varios niveles. La corola, blanquecina a rojiza o púrpura, mide cerca de 1,8 cm y tiene dos labios; el superior es cóncavo y más largo que el inferior. El cáliz termina en dientes puntiagudos. Para distinguirla de especies próximas conviene observar conjuntamente la división de las hojas y el tamaño y la forma de las flores.
